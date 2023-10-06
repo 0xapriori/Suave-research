@@ -1,5 +1,5 @@
 # Awesome SUAVE
-Repository for research notes and refernce materials related to SUAVE.
+Repository for research notes and refernce materials related to SUAVE. The repository features notes on the Spec proposd by Xyn, discussion with Christopher Goes, notes from the Bell Curve Podcast with Robert Miller, Jon Charb & Hasu, notes from talks by Robert Miller, Andrew Miller, and Daniel Marzec. 
 
 ## Diagrams (my own)
 
@@ -15,20 +15,20 @@ Repository for research notes and refernce materials related to SUAVE.
 
 
 ## Definitions ~
-* **Abstract Suave** - SUAVE is a permissionless credible commitment device (PCCD) that program and privately settle higher-order commitments for other PCCDs. It should look like a faster blocktime version of Ethereum but with SGX to ensure private mempool
-* **Concrete Suave** - SUAVE as *market for mechanisms* designed to decentralize the MEV supply chain by enabling centralized infrastructure (builders, relays, centralized RFQ routing, etc.) to be programmed as smart contracts on a decentralized blockchain.
-* **Endgame Suave** - Suave is designed to be the Mempool and Blockbuilder for all blockchains
+* **Abstract** - SUAVE is a permissionless credible commitment device (PCCD) that program and privately settle higher-order commitments for other PCCDs. It should look like a faster blocktime version of Ethereum but with SGX to ensure private mempool
+* **Concrete** - SUAVE as *market for mechanisms* designed to decentralize the MEV supply chain by enabling centralized infrastructure (builders, relays, centralized RFQ routing, etc.) to be programmed as smart contracts on a decentralized blockchain.
+* **Endgame** - SUAVE is designed to be the Mempool and Blockbuilder for all blockchains
 
 *Note that Abstract and Concrete is not Flashbots teminology.*
 
-### Abstratc Suave 
+## Abstract SUAVE 
 * [Xyn Spec](https://hackmd.io/@sxysun/suavespec)
 * [The Future of MEV is SUAVE](https://writings.flashbots.net/the-future-of-mev-is-suave)
 * [Devcon Talk](https://youtu.be/ACXAzLy3iWY)
 * [Apriori slide deck](https://github.com/0xapriori/Suave-research/blob/main/mmFood.pdf)
 * [Suave, Anoma, Shared Sequencers, and Super Builders](https://dba.mirror.xyz/NTg5FSq1o_YiL_KJrKBOsOkyeiNUPobvZUrLBGceagg)
 
-### Concrete Suave
+## Concrete SUAVE
 * [Suave-Geth repo](https://github.com/flashbots/suave-geth)
 * [Suave.Salon EthCC](https://drive.google.com/file/d/14KD40UV5yQwesnCEkDxd24Bb9tZMrHse/view?pli=1)
     * [Code Demo](https://drive.google.com/file/d/1IHuLtxwjRvRpYjMG3oRuAgS5MUZtmAXq/view)
@@ -44,7 +44,7 @@ Repository for research notes and refernce materials related to SUAVE.
 * [Convo on FB Forum Hasu, Elijah, Nikete, apriori](https://collective.flashbots.net/t/concerns-with-suaves-effect-on-ethereum-security-and-total-value-extracted/1035/10
 )
 
-### Literature
+## Literature
 * [CredibleCommitments.wtf](Crediblecommitments.wtf)
 * [MEV & Credible Commitments](https://docs.google.com/presentation/d/1BhPNVYzIVkpiQ9dKUqBhPYY7z04tchmlcfhwf5FaWvw/edit#slide=id.g187ff1cf8c1_0_459)
 * [Ethereum is game-changing technology, literally](https://medium.com/@virgilgr/ethereum-is-game-changing-technology-literally-d67e01a01cf8)
@@ -58,7 +58,7 @@ Repository for research notes and refernce materials related to SUAVE.
 * [TEE/SGX Wiki](https://collective.flashbots.net/t/tee-sgx-wiki/2019) 
 
 
-## Notes on Spec
+# Notes on Spec
 
 Suave is a market place for MEV solutions. Similar how users send their transactions to flashbots rpc endpoint to access the flashbots builder and MEV-Share devices, a user would instead have more choices. The advantage to this is it allows for decentralized MEV solutions as applications on SUAVE. In this way Suave acts as a global mempool and blockbuilder for Ethereum, rollups, and in the future all blockchains.   
 
@@ -73,7 +73,7 @@ For context there exist many competing MEV markets/devices today. All of these d
 With SUAVE these devices can be instantiated as smart contracts within Suave Chain's version of the EVM. Flashbots calls this the MEVM which is the EVM with custom precompiles for various MEV related actions. (need specifics here).  
 
 
-### Summary
+## Summary
   
 * SUAVE maintains a global state, which consists of accounts. There are two types of accounts: Externally Owned Accounts (EOAs) and Contract Accounts. EOAs are controlled by private keys, while Contract Accounts are controlled by the code they contain. The state is stored in a Merkle Patricia Trie.
 * Transactions are the means to transfer value and data between accounts. They contain fields like nonce, gas price, gas limit, recipient, value, data, and signature. Transactions are signed by the sender and submitted to the network.
@@ -90,7 +90,7 @@ With SUAVE these devices can be instantiated as smart contracts within Suave Cha
 
 
 
-## Older Notes & Comments on Spec
+# Older Notes & Comments on Spec
 
 **1.** Overall, the strategic uncertainty MEV of SUAVE originates from people's uncoordinated use of SUAVE's commitment constructors. And those commitments are either about higher order commitments of MEV games on other domains, or commitments of games on top of SUAVE.
 
@@ -112,34 +112,34 @@ Inductive Oracles :=
 | binancePrice: rational -> Oracles
 | NYSEPrice: rational -> Oracles.
 ```
-## Comments
+# Comments
 **2.** The literature provides helpful context, but SUAVE doesn't solve strategic uncertainty, neither does Anoma - the most a discrete system can do is reduce strategic uncertainty to an oracle problem. For example, in mutually-assured destruction, with credible commitments (suppose that they were binding to actually controlling nuke launches) you can commit to a strategy, but there's still uncertainty in whether the commitments actually reflect the reality (i.e. whether you don't have some secret nuke which isn't tracked in the system). Participants would still have strategic uncertainty in correspondence to how sure they are that the stated correspondence between the discrete digital representations, commitment constructors, etc. actually represents the real-world actions which they care about. Maybe this counts as "fundamental uncertainty" but it seems to me like a distinct category from what the spec discusses under that term.
 
 **3.** I'm not sure where this "asset price is random walk" theory comes from, I don't see any reason to expect that to be true. Future expected trajectories of asset prices are basically a world modelling problem - e.g. if there is an asset which reflects the price of storing a ton of carbon, w.r.t. gold (say) I would expect this to go down in the next few decades as the technology improves (and probably most people would), it's certainly not random. Probably there are some interesting directions in modelling fundamental uncertainty as a causal structure inference problem or something like this.
 
 **4.** Agree that higher-order commitments are necessary, though I think it's better to avoid the recursive type constructor definitions (as the talk mentioned). I think coordinating to avoid latency races is a very important topic which the SUAVE design provides a thoroughly unsatisfying answer to, they've just gone another step forward in the latency race, someone can just make a "SUAVE 2" with fewer validators and even lower latency. This is part of why I think the "slow game" problem & consensus between users is important.
 
---
 
-## Notes on Andrew Miller presentation 
+
+# Notes on Andrew Miller presentation 
 
 Secret network is a bit like Suave. It only has one mempool and its  a private mempool because all of the transactions in secret network are encrypted and the only way secret network transactions get into a block is by tendermint validators putting them in order but you can't do anything with the ciphertext until the block is already finalized and then you only get to execute them in the next vblock. 
 
 Secret network is already like suave in that they have  uniswap v2 clone which automatically has forntrunning resistance becasue of that built in blind ordering that is applied to every transaction sent through Secret Network. Sienna swap eliminates the nearest possibility of front running, and they have replay prevention that is sort of accurate
 
-### Before
+## Before
 
 That aloe does not solve the whole problem you want to solve because if you just have the fair ordering then you have messy arbitrage which comes later; e.g., unsophisticated trades create  mess someone must clean up. Messy arbitrage opportunities is the result of shitty user trades where the user trades on one pool but most of the liquidity is fragmented across other pools so the user gets a terrible price. 
 
-### After
+## After
 
 You only see the result of the trade after the block is finalized in time for the beginning of the process of the next block. Next A PGA happens rhen because whoever can get a transaction at the top of block gets to take all of the arbitrage opportunity restoring the balance of the pools and the searcher gets to pocket that arbitrage differnce. 
 
-### SUAVE
+## SUAVE
 
 How this could be done in a more trust-minimized way is MEV-share does today as in secret network in that your transaction is private until it gets settled. With mev-share backrunners get to bid on placing their tx after your's in the same block but when bidding they have to share the larger percentage of the arbitrage they take back with the original user. At a technical level it is implemented as extract and redistribute. Prefer to think of it as your getting a competitive auction to arbitragers for a commission for them to do the backrunning for you automatically upgrading your shitty transaction into a more sophisticated arbitrage free transaction that results. 
 
-### What is Suave as compared to what exists today? 
+## What is Suave as compared to what exists today? 
 
 1. Replace trust in the operator with trust in TEEs, This could be combined and/or replaced cryptography and threshold MPC
 2. Make the operation of the service decentralized, geographically and administratively - many different nodes not controlled by Flashbots, lower trust environments
@@ -156,12 +156,12 @@ Suave's strategy was anticipated by StrategyProof Computing from the NG, Parks, 
 
 > The SPC infrastructure must provide suport for multiple users to design and deploy competing LSP mechanisms, in amarket for mechanisms. With this, we achieve the second set of design principles of open and decentralized systems. Our belief is that an open marketplace will naturally lead to mechanisms with the "right scope" and the "right complexity." This decision rpresents a tradeoff b/w providing a large enough scope to suggiciently simplify the game-theoretic decision facing a participant - for example, bringing resources that are complementary for a large number of users into the same scope- while maintaing a small enough scope to build computationlly reasonable resource allocation mechanisms. The degree of which market forces lead to the emergence of mechanisms with the right scope is an important research question. 
 
-### Suave as an Ideal Functionality 
+## Suave as an Ideal Functionality 
 
 * In cryptography we use ideal functionalities to make a specification. If you skip the TEEs and decentralization and you did a trusted smart contract with a central third party it would look like this. For cryptographers this is understood as a security definition that describes the interface.
 * The interface is that there is a service which has smart contracts and private data storage on it. Just like secret network. The different kind of interfaces are market design innovators can make new contracts and push them onto the chain. Users can interact with the smart contract and there is still room for searchers/arbitragers who get explicit hints like mev-share hints or anything they can infer from side channels that are captured in the specification and they can invoke their own sc txs and input arbitrage inputs and so on. The imporitant thing is that this outputs an L1 block to Ethereum. 
 
-### Suave Architecture
+## Suave Architecture
 
 There are Scs on suave. There is a suave chain. There is a mempool of pending suave bids as well as bids that are finalized being in a chain. Being committed in suave chain doesn't mean the bid is satisfied yet it means its sequenced and has DA and you cannot ignore it on the suave chain. Not all of the execution happens on suave chain that suggests linear bottleneck and latency bottlenecking. The point is we will have off-suave chain execution. Rollup of a rollup or Sidechain of a sidechain. The execution is off-chain of suave chain but still carried out in trusted hardware enclaves by executors we call TEE kettles. So they can have access through their kettles to the confidential data but only according to the rules of the smart contracts as defined. Each smart contract defines the program rules for interacting with that contract's private data
 
@@ -169,9 +169,9 @@ There is some mempool of pending Suave bids. Suave blocks probably come much fas
 
 -- 
 
-## Notes from Bell Curve Podcast on Modular MEV 
+# Notes from Bell Curve Podcast on Modular MEV 
 
-### Fast Block times 
+## Fast Block times 
 
 >JC: As far as expressing preferences arbitrage I see and I want certain transactions to close this arb on another chain. If going through this process requires me to express a preference on Suave chain to commounicate this is what I want done. This implies you are bounded by the Suave chain blocktimes. If another chain I want to express a preference for has a realy fast blocktime and maybe that opportunity is going to disappear that means SUave chain would need a fast block time to express that preference in the first place. Does that kind of pressure just lead to having low blocktimes, incentivize Suave chain to have super low blocktimes and have the race to centralization there? 
 
@@ -185,7 +185,7 @@ There is some mempool of pending Suave bids. Suave blocks probably come much fas
 
 >RM: That does work. We do have a notion of a special transaction in Suave that will carry your signed commitments if you want to throw it in the Suave mempool which is what you want if you want the maximum number of executors to access your transaction, if you want it to be censorship resistant. If you want to skip all of that and really save on latency you could communicate it directly with executors jsut with this signature model. I do think your touching on something which you can't really get around because of the laws of physics that there will be some cross-domain MEV which is not possible to extract because of latency. There is some kind of pressure like there is today  from latency in cross-domain extraction on domains that are centralized and have faster blocktimes too. I think thats inherent to cross-domain MEV, I don't know that we can do anything about that. This is a reason for us as a community to align on real decentralization. 
 
-### Why do you need a Suave chain? 
+## Why do you need a Suave chain? 
 
 - Need for a chain to transmit preferences efficiently: low cost and DoS resistant
 - Imposing a fee during network congestion by including preferences on-chain deters attackers
@@ -209,9 +209,9 @@ There is some mempool of pending Suave bids. Suave blocks probably come much fas
 
 --
 
-## Robert Miller on Suave
+# Robert Miller on Suave
 
-### SUAVE architecture with the MEVM
+## SUAVE architecture with the MEVM
 
 SUAVE - 3 main components 
 - MEMVM chain - modified EVM chian with special precompiles for MEV use cases
@@ -229,14 +229,14 @@ SUAVE - 3 main components
 ![](https://hackmd.io/_uploads/HkU_uoRJa.png)
 
 
-4 main stake holders
+### 4 main stake holders
 
 - developers who are writing their MEV infrastructure as smart contracts
 - users who send private data that they want included on chain and authorizing some contracts saying they accept this auction or block-building contract for their transaction to have access to their private data.
 - Executors backrunning, arbitraging, doing MEV things to execute people's bids
 - The net result of SUAVE is creating blocks that are included on chain for Ethereum or rollups
 
-Execution Nodes
+### Execution Nodes
 
 * Smart contracts define off-chain execution that is performed inside execution nodes
 * Execution nodes have access to private data
@@ -245,13 +245,13 @@ Execution Nodes
 ![](https://hackmd.io/_uploads/r1S5uj0ya.png)
 
 
-Commentary:
+**Commentary**
 
 You have developers who are defining in smart contracts off-chain execution which is performed by the execution node. Your smart contract says take all of these transactions, simulate them and treat them according to this algorithm. That's not actually performed on-chain. Instead all of that is performed in an Execution Node in a TEE like an SGX where you know the code is runnning with some level of privacy and integrity. This is a really scalable way to get private and confidential compute for MEV use cases. The other thing to note is that Execution Nodes if a user permissions a certain smart contract, have access to private data. 
 
 ### Example MEVM Contract
 
-``` rust
+``` go
 
 function EGPBuild (Bundle [] allBundles) external {
 // EGP = effective gas price
@@ -284,7 +284,7 @@ exportBlock (block);
 
 ```
 
-Commentary
+**Commentary**
 
 This is what an MEVM contract looks like. Take for example the Flashbots builder today - FB blockbuilding algorithm written with MEVM. You can see how it has a couple functions you normally don't have within Ethereum
 - We are getting Ethereum main-net state on the 5th line, the latest block state
@@ -294,7 +294,7 @@ This is what an MEVM contract looks like. Take for example the Flashbots builder
 
 These are the super powers the MEVM gives you that you don't have available on Ethereum. This is jsut one example.  
 
-### Other potential MEVM contracts
+## Other potential MEVM contracts
 - New building algorithms
 - Pre-confirmations
 - UniswapX
@@ -304,19 +304,19 @@ These are the super powers the MEVM gives you that you don't have available on E
 - Composing the above
 - ...etc
 
-Commentary
+**Commentary**
 
 Any off-chain MEVM infrastructure we have the ambition of being able to support within the MEVM. 
 
 
-### Suave as a Market
+## Suave as a Market
 - Suave is a decentralized platfrom for MEV applications
 - Suave will drastically lower the barrier to experimenting in the block building market and open access to orderflow in particular
 - MEV applications compete and compose together in an open market for innovation, resulting in better outcomes for users and betetr blocks for validators
 
 Having low barriers for people to deploy their own MEV infrastructure in this environment. Have these different applciations compose together into something that is larger. This is not a monolithic flashbots builder that we are decentralizing. Instead this is a platform where anyone can deply their own applications and all of these can compete and compsoe togetherin this open market. We thing ultimately this positivie sum platform vision will result in better blocks for validators. 
 
-### Other domains and SUAVE
+## Other domains and SUAVE
 
 This isn't supposed to be made just for Ethereum but instead a platform to be building blocks for many chains. You can have execution nodes running, EVM, WASM, or any VM you want. The integration is relatively straight forward so long as your chain has some way to listen to Suave for blocks. 
 
@@ -324,7 +324,7 @@ We landed our first block on Goerli test net a couple of days ago.
 
 ![](https://hackmd.io/_uploads/BkuA99AJ6.png)
 
-### Roadmap
+## Roadmap
 
 Suave Centauri
 
@@ -333,9 +333,9 @@ My thoughts: MEV-Share and SUAVE-GETH devnet, landing blocks on Goerli already
 * Privacy-aware orderflow auction to return to users the MEV that their transactions creater. In this auction, searchers competw for the right to back run a user, thereby bidding up the value returned to them. Initially the auction assums trust in Flashbots but is private for users and searchers
 * SUAVE Chain devnet for stress testing and community experimentation
 
-Commentary: 
+**Commentary**
 
-- Moving towards the Centauri release which is a devet launching in Q4 where anyone that wants to can deploy their own MEV infrastructure as smart contracts on SUave. We will share examples of what it looks like to take all of our centralized infrastructure and create them as smaert contracts on SUave using the MEVM targetting Q4 of this year
+Moving towards the Centauri release which is a devet launching in Q4 where anyone that wants to can deploy their own MEV infrastructure as smart contracts on SUave. We will share examples of what it looks like to take all of our centralized infrastructure and create them as smaert contracts on SUave using the MEVM targetting Q4 of this year
 
 SUAVE Andromeda 
 
@@ -350,10 +350,10 @@ Commentary:
 - Initially execution nodes won't be in SGX or TEEs so they will require some trust in Flashbots
 - The next release Andromeda we will put those nodes inside an SGX and that sysetm will not have any trust in FlashbotsAt that point we will look to move onto other Domains too. If you are a rollup or L1 developer reach out to discuss integration.
 
--- 
-## DMarzec Talk at SBC HH
 
-### Overview
+# DMarzec Talk at SBC HH
+
+## Overview
 
 You can submit a transaction. With MEV-Share we will release a subset of the information that searchers can then search on and send a transaction back in which will backrun it. MEV-Blocker does something similar except they just reveal the full information and then they, in order to stop probabilistic sandwiching introduce fake transactions. 
 
@@ -367,7 +367,7 @@ We also envision people/searchers/builders, etc. running alot of these nodes and
 
 Another cool thing this solves in the builder market is alot of the iteration on block building mechanisms is most heavily constrained based on the order flow you have. If you only have 50% of the orderflow and you want to compete on bundle merging with jaredfromsubway. You can't really meaningfully iterate their if you don't have jared's order flow. This stops a lot of builders from being able to iterate. So we hope that in the base case SUAVE will lower the barriers of entry to the building market because you can get access to the entire order flow of everyone submitting through SUAVE.
 
-### What is SUAVE compared to what exists today? 
+## What is SUAVE compared to what exists today? 
 
 Replace trust in operators with TEEs, maybe eventually threshold MPC some type of crypto. I think if we have the exact same block building infrastructure we have today but its on TEEs, I think we are in a radically better place. This isn't the 5-10 years timeline of what this market will actually look like, but we think its way better than trusting some random server that says they won't leak your data or something like that. 
 
@@ -377,23 +377,21 @@ Make the operation of the service decentralized, geographically and administrati
 
 User programmable based on smart contracts - a marketplace for mechanisms. Any degen AMM designer or smart contract dev should be able to read a tutorial deploy their own OFA on-top of Uniswap and you could meaningfully compete with orderflow. You don't need to be associated with Uniswap or anything. 
 
-### Off-chain backend
+## Off-chain backend
 
-EVM, state DBs, and some configs and contexts. You have this runtime which winds up at the interpreter and this is what translates your byte code. A
-
-Interpreter is what translates your byte code and runs the execution. 
+EVM, state DBs, and some configs and contexts. You have this runtime which winds up at the interpreter and this is what translates your byte code. Interpreter is what translates your byte code and runs the execution. 
 
 The MEVM is a new runtime, the SUAVE off-chain backend, and it plugs right into the interpreter so now at execution time your code has access to these fields. You get a confidential back-end that your execution gets access too as well as this off-chain eth backend so you can call functionality tht is used in traditional block building which is simulate a bundle or build a block. You get access to all of those inside your smart contract which is really awesome. 
 
 So you can deploy a program that will take in a transaction and simulate it, do something with it based on the results of the simulation and maybe route it to another smart contract and you can kind of stack these things. You can imagine multiple layers of OFA contracts, Multiple Layers of block building contracts, multiple layers of relay contracts, and they all can sort of plug and play. The point is not to be prescriptive on what the right route through the supply chain is. Its about anyone being able to propose new ways for these mechanisms to interact and operate and then just let the market win for which one is the best.
 
-### MEV supply chain
+## MEV supply chain
 
 What are the differences in UX in terms of using SUAVE? Suave does not make any types of opinionated claims about the intent framework portion. That is for anyone to go out and design an intent framework to operate here. We have a new tx type called an off-chain tx type, it basically is like a regular Ethereum tx but the call data is for a function call on SUAVE and there is an additional field called confidential input which is your encrypted bundle. But other than that almost exactly the same one or two field differences. As well you also specify which contracts are allowed to execute over your tx. 
 
 The RPC is also slightly modified. This send raw tx just takes this new off-chain tx type. How the RPC and the block builder communicate is different now. They communicate through the confidential data store. So your OFA can output a combination of the user's bundle with whatever transaction the OFA might have inserted like in MEV-share. Its like a refund transaction. The way to communicate that is passing it through SUAVE internally. Block building and the way it communicates with the relay is through tis confidential data store as well. Typically these have been http, you just do a post request. The portion of relay to proposer will probably stay the same for a while. There is no relay or proposer native to SUAVE so this will always be the last mile of the supply chain. We hope that there will be some cool p2p network standard that will come out so we can just broadcast these commitments to proposers and they can accept, but that's probably a long way to go. 
 
-### What's possible?
+## What's possible?
 
 1. Solidity based
 	- OFAs
@@ -417,7 +415,7 @@ The RPC is also slightly modified. This send raw tx just takes this new off-chai
 
 3. EIP 4844 blob Merging - right now the way 4844 is structured you pay an upfront amount even if you don't use the entire blobgas. Imagine rollups that only need 1/3 of the blob gas in a specific transaction. Because of the properties of the underlying cryptography you can actually combine these transactions into one and it will satisfy everyone's original intent. You can design something on SUAVE which will merge these. I don't know if you need privacy for that case but you would get the decentralized aspect of running that service.  
 
-### SUAVE subnets 
+## SUAVE subnets 
  
  One thing we are playing around with is weather a smart contract can specify the DA guarantees that it provides. 
  - You could have something like where a subset of nodes run the unix auction perhaps. 
