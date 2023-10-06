@@ -1,6 +1,9 @@
 # Awesome SUAVE
 Repository for research notes and refernce materials related to SUAVE.
 
+![image](https://github.com/0xapriori/Suave-research/assets/116141134/6b8a0f20-39c0-4009-ba27-102d66cf58d4)
+
+
 
 ## Definitions ~
 * **Abstract Suave** - SUAVE is a permissionless credible commitment device (PCCD) that program and privately settle higher-order commitments for other PCCDs. It should look like a faster blocktime version of Ethereum but with SGX to ensure private mempool
