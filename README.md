@@ -107,9 +107,11 @@ Inductive Oracles :=
 
 **4.** Agree that higher-order commitments are necessary, though I think it's better to avoid the recursive type constructor definitions (as the talk mentioned). I think coordinating to avoid latency races is a very important topic which the SUAVE design provides a thoroughly unsatisfying answer to, they've just gone another step forward in the latency race, someone can just make a "SUAVE 2" with fewer validators and even lower latency. This is part of why I think the "slow game" problem & consensus between users is important.
 
+--
+
 ## Notes on Andrew Miller presentation 
 
-* Secret network is a bit like Suave. It only has one mempool and its  a private mempool because all of the transactions in secret network are encrypted and the only way secret network transactions get into a block is by tendermint validators putting them in order but you can't do anything with the ciphertext until the block is already finalized and then you only get to execute them in the next vblock. 
+Secret network is a bit like Suave. It only has one mempool and its  a private mempool because all of the transactions in secret network are encrypted and the only way secret network transactions get into a block is by tendermint validators putting them in order but you can't do anything with the ciphertext until the block is already finalized and then you only get to execute them in the next vblock. 
 
 Secret network is already like suave in that they have  uniswap v2 clone which automatically has forntrunning resistance becasue of that built in blind ordering that is applied to every transaction sent through Secret Network. Sienna swap eliminates the nearest possibility of front running, and they have replay prevention that is sort of accurate
 
@@ -121,7 +123,7 @@ That aloe does not solve the whole problem you want to solve because if you just
 
 You only see the result of the trade after the block is finalized in time for the beginning of the process of the next block. Next A PGA happens rhen because whoever can get a transaction at the top of block gets to take all of the arbitrage opportunity restoring the balance of the pools and the searcher gets to pocket that arbitrage differnce. 
 
-## SUAVE
+### SUAVE
 
 How this could be done in a more trust-minimized way is MEV-share does today as in secret network in that your transaction is private until it gets settled. With mev-share backrunners get to bid on placing their tx after your's in the same block but when bidding they have to share the larger percentage of the arbitrage they take back with the original user. At a technical level it is implemented as extract and redistribute. Prefer to think of it as your getting a competitive auction to arbitragers for a commission for them to do the backrunning for you automatically upgrading your shitty transaction into a more sophisticated arbitrage free transaction that results. 
 
