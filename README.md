@@ -1,6 +1,15 @@
 # Awesome SUAVE
 Repository for research notes and refernce materials related to SUAVE.
 
+## Diagrams (my own)
+
+### Market for Mechanisms
+
+![image](https://github.com/0xapriori/Suave-research/assets/116141134/d97fc69d-ba29-43ee-9b58-d523da92e6d9)
+
+
+### Preferemce(intent?) lifecycle
+
 ![image](https://github.com/0xapriori/Suave-research/assets/116141134/6b8a0f20-39c0-4009-ba27-102d66cf58d4)
 
 
@@ -340,4 +349,81 @@ Commentary:
 
 - Initially execution nodes won't be in SGX or TEEs so they will require some trust in Flashbots
 - The next release Andromeda we will put those nodes inside an SGX and that sysetm will not have any trust in FlashbotsAt that point we will look to move onto other Domains too. If you are a rollup or L1 developer reach out to discuss integration.
+
+-- 
+## DMarzec Talk at SBC HH
+
+### Overview
+
+You can submit a transaction. With MEV-Share we will release a subset of the information that searchers can then search on and send a transaction back in which will backrun it. MEV-Blocker does something similar except they just reveal the full information and then they, in order to stop probabilistic sandwiching introduce fake transactions. 
+
+With SUAVE what you can actually do is encode that logic for your orderflow auction as smart contract. You can then deploy it onto SUAVE. The key here is that the user will then encrypt their transaction to the SUAVE network and then they will send it into a SUAVE node. Now anyone can run the auction, so you have a verified program that they are running on top of confidential user bids. 
+
+The other cool thing that SC enabled OFAs give you is that you can actually control the privacy model so if you want to leak some of the information as in MEV-share, you can choose to do that - the user specifically allows certain contracts that they send their bids to. 
+
+If I write some contract that will leak all of your information and give you nothing, and as the user you are free to click on that and use it but we think that you can also submit to some really shitty AMM today. People don't do this because their are various network of trust type of scenarios. 
+
+We also envision people/searchers/builders, etc. running alot of these nodes and are incentivized to try and get as much order flow as they can. 
+
+Another cool thing this solves in the builder market is alot of the iteration on block building mechanisms is most heavily constrained based on the order flow you have. If you only have 50% of the orderflow and you want to compete on bundle merging with jaredfromsubway. You can't really meaningfully iterate their if you don't have jared's order flow. This stops a lot of builders from being able to iterate. So we hope that in the base case SUAVE will lower the barriers of entry to the building market because you can get access to the entire order flow of everyone submitting through SUAVE.
+
+### What is SUAVE compared to what exists today? 
+
+Replace trust in operators with TEEs, maybe eventually threshold MPC some type of crypto. I think if we have the exact same block building infrastructure we have today but its on TEEs, I think we are in a radically better place. This isn't the 5-10 years timeline of what this market will actually look like, but we think its way better than trusting some random server that says they won't leak your data or something like that. 
+
+We have very experienced SGX engineers who know how to mitigate exploits and things of that nature. If there is an exploit, and say three blocks are unbundled, that's really bad yes, but typically that's not as bad as Ethereum going down. Also many people finding these exploits are sophisticated labs doing this for academic cloud and not some random 16 year old in their bedroom. 
+
+Make the operation of the service decentralized, geographically and administratively. Ideally one person should not be able to shut down the system. Geographic Decentralization  is a longer term 
+
+User programmable based on smart contracts - a marketplace for mechanisms. Any degen AMM designer or smart contract dev should be able to read a tutorial deploy their own OFA on-top of Uniswap and you could meaningfully compete with orderflow. You don't need to be associated with Uniswap or anything. 
+
+### Off-chain backend
+
+EVM, state DBs, and some configs and contexts. You have this runtime which winds up at the interpreter and this is what translates your byte code. A
+
+Interpreter is what translates your byte code and runs the execution. 
+
+The MEVM is a new runtime, the SUAVE off-chain backend, and it plugs right into the interpreter so now at execution time your code has access to these fields. You get a confidential back-end that your execution gets access too as well as this off-chain eth backend so you can call functionality tht is used in traditional block building which is simulate a bundle or build a block. You get access to all of those inside your smart contract which is really awesome. 
+
+So you can deploy a program that will take in a transaction and simulate it, do something with it based on the results of the simulation and maybe route it to another smart contract and you can kind of stack these things. You can imagine multiple layers of OFA contracts, Multiple Layers of block building contracts, multiple layers of relay contracts, and they all can sort of plug and play. The point is not to be prescriptive on what the right route through the supply chain is. Its about anyone being able to propose new ways for these mechanisms to interact and operate and then just let the market win for which one is the best.
+
+### MEV supply chain
+
+What are the differences in UX in terms of using SUAVE? Suave does not make any types of opinionated claims about the intent framework portion. That is for anyone to go out and design an intent framework to operate here. We have a new tx type called an off-chain tx type, it basically is like a regular Ethereum tx but the call data is for a function call on SUAVE and there is an additional field called confidential input which is your encrypted bundle. But other than that almost exactly the same one or two field differences. As well you also specify which contracts are allowed to execute over your tx. 
+
+The RPC is also slightly modified. This send raw tx just takes this new off-chain tx type. How the RPC and the block builder communicate is different now. They communicate through the confidential data store. So your OFA can output a combination of the user's bundle with whatever transaction the OFA might have inserted like in MEV-share. Its like a refund transaction. The way to communicate that is passing it through SUAVE internally. Block building and the way it communicates with the relay is through tis confidential data store as well. Typically these have been http, you just do a post request. The portion of relay to proposer will probably stay the same for a while. There is no relay or proposer native to SUAVE so this will always be the last mile of the supply chain. We hope that there will be some cool p2p network standard that will come out so we can just broadcast these commitments to proposers and they can accept, but that's probably a long way to go. 
+
+### What's possible?
+
+1. Solidity based
+	- OFAs
+	- Builders
+	- DEX aggregators
+	- RFQs
+	- Validity Conditions
+	- Redistribution
+	- "Intents"
+	- Proposer Builder Commitments
+
+	- DEX aggregators - You can do all of this same logic except on SUAVE where you know the computation is guaranteed to be what you allowed as well as knowing your data is private and up to the amount you specified. Same exact experience maybe a bit slower in the beginning. In the limit these things will be very comparable latency wise. 
+
+	- Validity conditions - specify arbitrary conditions that your transaction is allowed to be included on chain. One example is a refund. I am only going to allow my transaction to be included onchain if I am sent half of the MEV extracted back. You can encode this in a smart contract and it won't even give your bundle to a builder unless that condition is satisfied 
+
+	- Intents - if you create one of these languages to express intents then you can easily create an auction on SUAVE for it as well. 
+
+	- Proposer-Builder commitments - you can imagine much more advanced commitments then what we have now 
+
+2. Private Voting - not a use case we are focused on but you have privacy and cheap computation so you could in theory
+
+3. EIP 4844 blob Merging - right now the way 4844 is structured you pay an upfront amount even if you don't use the entire blobgas. Imagine rollups that only need 1/3 of the blob gas in a specific transaction. Because of the properties of the underlying cryptography you can actually combine these transactions into one and it will satisfy everyone's original intent. You can design something on SUAVE which will merge these. I don't know if you need privacy for that case but you would get the decentralized aspect of running that service.  
+
+### SUAVE subnets 
+ 
+ One thing we are playing around with is weather a smart contract can specify the DA guarantees that it provides. 
+ - You could have something like where a subset of nodes run the unix auction perhaps. 
+	 - That OFA however its designed could maybe specify 200 ms rounds so those nodes have to come to agreement on which transactions are available to all of them and that could be used as inputs to the auction. 
+	 
+That is one idea but this is certainly an open question that gets into the idea that if the main suave chain is this global bulletin board, one application doesn't care if another application's data is available. If you are the block builder it does but if you are CoWSwap it doesn't matter what uniswap is doing so we are playing around with that. 
+ 
+  
 
