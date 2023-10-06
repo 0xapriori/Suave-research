@@ -195,3 +195,146 @@ There is some mempool of pending Suave bids. Suave blocks probably come much fas
 
 >Hasu: The last thing to point out is nuetrality. As Suave moves beyond Ethereum I think there is the question is it fair that all of these preferences get settled on an actual settlement layer or should this be its own standalone nuetral layer that has ownership and participation and so on thats crafted in an entirely bottom up way from these different domains. Part of getting adoption for a system like this is designing for political nuetrality. And maybe the existing ownership of Ethereum may not be optimized in such a way that it gets buy in from Cosmos, Solana, and other centralized exchanges. 
 
+--
+
+## Robert Miller on Suave
+
+### SUAVE architecture with the MEVM
+
+SUAVE - 3 main components 
+- MEMVM chain - modified EVM chian with special precompiles for MEV use cases
+    - some of these precompiles call out to an execution Node. 
+- Execution Node - this is an off-chain node providing 
+    - execution, 
+    - similating transactions, 
+    - merging them together, 
+    - building a block, 
+    - inserting new transactions.
+        - Its doing this to provide credible and private compute off-chain that you don't want to do on-chain.
+        - These run in trusted execution environments so that you can still trust the outputs and the results of this compute even though its not all being performed on-chain
+- Confidential data store - for private information you don't want to store on-chain which can be accessed by the execution node. 
+
+![](https://hackmd.io/_uploads/HkU_uoRJa.png)
+
+
+4 main stake holders
+
+- developers who are writing their MEV infrastructure as smart contracts
+- users who send private data that they want included on chain and authorizing some contracts saying they accept this auction or block-building contract for their transaction to have access to their private data.
+- Executors backrunning, arbitraging, doing MEV things to execute people's bids
+- The net result of SUAVE is creating blocks that are included on chain for Ethereum or rollups
+
+Execution Nodes
+
+* Smart contracts define off-chain execution that is performed inside execution nodes
+* Execution nodes have access to private data
+* Execution nodes run insdie of trusted execution environments to provide privacy and credibility to compute
+
+![](https://hackmd.io/_uploads/r1S5uj0ya.png)
+
+
+Commentary:
+
+You have developers who are defining in smart contracts off-chain execution which is performed by the execution node. Your smart contract says take all of these transactions, simulate them and treat them according to this algorithm. That's not actually performed on-chain. Instead all of that is performed in an Execution Node in a TEE like an SGX where you know the code is runnning with some level of privacy and integrity. This is a really scalable way to get private and confidential compute for MEV use cases. The other thing to note is that Execution Nodes if a user permissions a certain smart contract, have access to private data. 
+
+### Example MEVM Contract
+
+``` rust
+
+function EGPBuild (Bundle [] allBundles) external {
+// EGP = effective gas price
+// Pass #: Estimate EGP of each bundle based on top-of-block sim
+SimulatedBundle [] simmedBundles = new SimulatedBundle [] (allBundles. length);
+State l1State = getState("EthereumMainnet", "latest") // Get latest mainnet state
+for (uint 1 = 0; 1 < allBundles. length; 1++) {
+    SimulatedBundle simmedBundle = simulateBundle(L1State, allBundles [i]);
+    simmedBundles [i] = simmedBundle;
+    
+}
+    
+// Sort the bundles by EGP such that the highest EGP is first
+sortBundles (simmedBundles, "effectiveGasPrice");
+    
+    
+Block block;
+block.state = l1State;
+for (uint 1 = 0; 1 < allBundles. length; i++) {
+    Sim simmedBundle = simulatepplyingBundle(block, allBundles [i]);
+    
+    if (simmedBundle.reverts as false && simmedBundle <= 0.99*simmedBundles[il){
+block.txs.push (simmedBundles.txs);
+    }
+        
+}
+exportBlock (block);
+    
+}
+
+```
+
+Commentary
+
+This is what an MEVM contract looks like. Take for example the Flashbots builder today - FB blockbuilding algorithm written with MEVM. You can see how it has a couple functions you normally don't have within Ethereum
+- We are getting Ethereum main-net state on the 5th line, the latest block state
+- We are simultating bundles of transactions getting results
+- We have a pending block there and we are simulating adding new transactions to it, seeing if they fail and discarding them
+- We are exporting the block (2nd to last line) making it available for Ethereum proposers to include it on chain if they request it from SUAVE
+
+These are the super powers the MEVM gives you that you don't have available on Ethereum. This is jsut one example.  
+
+### Other potential MEVM contracts
+- New building algorithms
+- Pre-confirmations
+- UniswapX
+- CowSwap
+- MEV-Share
+- Distirbuted building
+- Composing the above
+- ...etc
+
+Commentary
+
+Any off-chain MEVM infrastructure we have the ambition of being able to support within the MEVM. 
+
+
+### Suave as a Market
+- Suave is a decentralized platfrom for MEV applications
+- Suave will drastically lower the barrier to experimenting in the block building market and open access to orderflow in particular
+- MEV applications compete and compose together in an open market for innovation, resulting in better outcomes for users and betetr blocks for validators
+
+Having low barriers for people to deploy their own MEV infrastructure in this environment. Have these different applciations compose together into something that is larger. This is not a monolithic flashbots builder that we are decentralizing. Instead this is a platform where anyone can deply their own applications and all of these can compete and compsoe togetherin this open market. We thing ultimately this positivie sum platform vision will result in better blocks for validators. 
+
+### Other domains and SUAVE
+
+This isn't supposed to be made just for Ethereum but instead a platform to be building blocks for many chains. You can have execution nodes running, EVM, WASM, or any VM you want. The integration is relatively straight forward so long as your chain has some way to listen to Suave for blocks. 
+
+We landed our first block on Goerli test net a couple of days ago. 
+
+![](https://hackmd.io/_uploads/BkuA99AJ6.png)
+
+### Roadmap
+
+Suave Centauri
+
+My thoughts: MEV-Share and SUAVE-GETH devnet, landing blocks on Goerli already
+
+* Privacy-aware orderflow auction to return to users the MEV that their transactions creater. In this auction, searchers competw for the right to back run a user, thereby bidding up the value returned to them. Initially the auction assums trust in Flashbots but is private for users and searchers
+* SUAVE Chain devnet for stress testing and community experimentation
+
+Commentary: 
+
+- Moving towards the Centauri release which is a devet launching in Q4 where anyone that wants to can deploy their own MEV infrastructure as smart contracts on SUave. We will share examples of what it looks like to take all of our centralized infrastructure and create them as smaert contracts on SUave using the MEVM targetting Q4 of this year
+
+SUAVE Andromeda 
+
+My thoughts: Sweet spot for Suave to start picking up significant volume and begin experimenting with cross-domain MEV for Ethereum and rollups. TEE Execution nodes remove trust in Flashbots 
+
+* SUAVE Chain mainnet will allow users to express preferences and send them to the Execution Market
+* SGX-based orderflow auction to remove trust in Flashbots and make the auction efficient for searcehrs
+* SGX-based centralized block building to enable open but private orderflow for centralzied builders
+
+Commentary:
+
+- Initially execution nodes won't be in SGX or TEEs so they will require some trust in Flashbots
+- The next release Andromeda we will put those nodes inside an SGX and that sysetm will not have any trust in FlashbotsAt that point we will look to move onto other Domains too. If you are a rollup or L1 developer reach out to discuss integration.
+
