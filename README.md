@@ -1,5 +1,5 @@
 # Awesome SUAVE
-Repository for research notes and refernce materials related to SUAVE. The repository features notes on the Spec proposd by Xyn, discussion with Christopher Goes, notes from the Bell Curve Podcast with Robert Miller, Jon Charb & Hasu, notes from talks by Robert Miller, Andrew Miller, and Daniel Marzec. 
+This Repository is for research notes and reference materials related to SUAVE. I was maintaining a HackMD but i think this maybe a more flexible substrate. The repository features notes on the Spec proposd by Xyn, discussion with Christopher Goes, notes from the Bell Curve Podcast with Robert Miller, Jon Charb & Hasu, notes from talks by Robert Miller, Andrew Miller, and Daniel Marzec. 
 
 ## Diagrams (my own)
 
