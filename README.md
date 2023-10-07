@@ -1,7 +1,16 @@
 # Awesome SUAVE
 This Repository is for research notes and reference materials related to SUAVE. I was maintaining a HackMD but i think this maybe a more flexible substrate. The repository features notes on the Spec proposd by Xyn, discussion with Christopher Goes, notes from the Bell Curve Podcast with Robert Miller, Jon Charb & Hasu, notes from talks by Robert Miller, Andrew Miller, and Daniel Marzec. 
 
-## Diagrams (my own)
+## Definitions 
+* **Abstract** - SUAVE is a permissionless credible commitment device (PCCD) that program and privately settle higher-order commitments for other PCCDs. It should look like a faster blocktime version of Ethereum but with SGX to ensure private mempool
+* **Concrete** - SUAVE as *market for mechanisms* designed to decentralize the MEV supply chain by enabling centralized infrastructure (builders, relays, centralized RFQ routing, etc.) to be programmed as smart contracts on a decentralized blockchain.
+* **Endgame** - SUAVE is designed to be the Mempool and Blockbuilder for all blockchains
+
+*Note that Abstract and Concrete is not Flashbots teminology.*
+
+## Diagrams 
+
+*Note these are my own interpretations.* 
 
 ### Market for Mechanisms
 
@@ -13,13 +22,6 @@ This Repository is for research notes and reference materials related to SUAVE. 
 ![image](https://github.com/0xapriori/Suave-research/assets/116141134/6b8a0f20-39c0-4009-ba27-102d66cf58d4)
 
 
-
-## Definitions ~
-* **Abstract** - SUAVE is a permissionless credible commitment device (PCCD) that program and privately settle higher-order commitments for other PCCDs. It should look like a faster blocktime version of Ethereum but with SGX to ensure private mempool
-* **Concrete** - SUAVE as *market for mechanisms* designed to decentralize the MEV supply chain by enabling centralized infrastructure (builders, relays, centralized RFQ routing, etc.) to be programmed as smart contracts on a decentralized blockchain.
-* **Endgame** - SUAVE is designed to be the Mempool and Blockbuilder for all blockchains
-
-*Note that Abstract and Concrete is not Flashbots teminology.*
 
 ## Abstract  
 * [Xyn Spec](https://hackmd.io/@sxysun/suavespec)
