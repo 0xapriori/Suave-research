@@ -1,5 +1,5 @@
 # Awesome SUAVE
-This Repository is for research notes and reference materials related to SUAVE. I was maintaining a HackMD but i think this maybe a more flexible substrate. The repository features notes on the Spec proposd by Xyn, discussion with Christopher Goes, notes from the Bell Curve Podcast with Robert Miller, Jon Charb & Hasu, notes from talks by Robert Miller, Andrew Miller, and Daniel Marzec. 
+This repository is for research notes and reference materials related to SUAVE. I was maintaining a HackMD but i think this maybe a more flexible substrate. The repository features notes on the Spec proposd by Xyn, discussion with Christopher Goes, notes from the Bell Curve Podcast with Robert Miller, Jon Charb & Hasu, notes from talks by Robert Miller, Andrew Miller, and Daniel Marzec. 
 
 ## Definitions 
 * **Abstract** - SUAVE is a permissionless credible commitment device (PCCD) that program and privately settle higher-order commitments for other PCCDs. It should look like a faster blocktime version of Ethereum but with SGX to ensure private mempool
@@ -10,7 +10,7 @@ This Repository is for research notes and reference materials related to SUAVE. 
 
 ## Diagrams 
 
-*Note these are my own interpretations.* 
+*Note these are my own interpretations. Quote is attributable to Robert Miller at Flashbots* 
 
 ### Market for Mechanisms
 
