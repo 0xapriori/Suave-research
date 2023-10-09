@@ -25,6 +25,7 @@ This repository is for research notes and reference materials related to SUAVE. 
 * [Suave, Anoma, Shared Sequencers, and Super Builders](https://dba.mirror.xyz/NTg5FSq1o_YiL_KJrKBOsOkyeiNUPobvZUrLBGceagg)
 
 ## Concrete 
+* [Intents, SUAVE & Off-chain Auction Infrastructure](https://www.youtube.com/watch?v=DIvHVvjwhAs)
 * [Suave-Geth repo](https://github.com/flashbots/suave-geth)
 * [Suave.Salon EthCC](https://drive.google.com/file/d/14KD40UV5yQwesnCEkDxd24Bb9tZMrHse/view?pli=1)
     * [Code Demo](https://drive.google.com/file/d/1IHuLtxwjRvRpYjMG3oRuAgS5MUZtmAXq/view)
@@ -41,6 +42,7 @@ This repository is for research notes and reference materials related to SUAVE. 
 )
 
 ## Literature
+* [Strategyproof Computing: Systems Infrastructures for Self-Interested Parties](https://dash.harvard.edu/bitstream/handle/1/4101256/Ng_Strategyproof.pdf)
 * [CredibleCommitments.wtf](Crediblecommitments.wtf)
 * [MEV & Credible Commitments](https://docs.google.com/presentation/d/1BhPNVYzIVkpiQ9dKUqBhPYY7z04tchmlcfhwf5FaWvw/edit#slide=id.g187ff1cf8c1_0_459)
 * [Ethereum is game-changing technology, literally](https://medium.com/@virgilgr/ethereum-is-game-changing-technology-literally-d67e01a01cf8)
