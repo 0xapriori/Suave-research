@@ -17,12 +17,6 @@ This repository is for research notes and reference materials related to SUAVE. 
 ![image](https://github.com/0xapriori/Suave-research/assets/116141134/d97fc69d-ba29-43ee-9b58-d523da92e6d9)
 
 
-### Preferece (intent?) lifecycle
-
-![image](https://github.com/0xapriori/Suave-research/assets/116141134/6b8a0f20-39c0-4009-ba27-102d66cf58d4)
-
-
-
 ## Abstract  
 * [Xyn Spec](https://hackmd.io/@sxysun/suavespec)
 * [The Future of MEV is SUAVE](https://writings.flashbots.net/the-future-of-mev-is-suave)
