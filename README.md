@@ -42,6 +42,8 @@ This repository is for research notes and reference materials related to SUAVE. 
 * [MEV-Share: programmably private orderflow to share MEV with users](https://collective.flashbots.net/t/mev-share-programmably-private-orderflow-to-share-mev-with-users/1264) 
 * [Announcing MEV-share beta](https://collective.flashbots.net/t/announcing-mev-share-beta/1650) 
 * [Block Building Inside SGX](https://writings.flashbots.net/block-building-inside-sgx)
+* [Trillion Dollar MEV Question - Robert Miller at Research Day May '23](https://www.youtube.com/watch?v=haTD69gjOF8&pp=ygULTUVWIC0gc2hhcmU%3D)
+* [Why TEEs suck both less and more than you think - Phil Daian](https://www.youtube.com/watch?v=ek-bu4aoh0A&pp=ygUTcGhpbCBkYWlhbiB0ZWUgc3Vjaw%3D%3D)
 * [Convo on FB Forum Hasu, Elijah, Nikete, apriori](https://collective.flashbots.net/t/concerns-with-suaves-effect-on-ethereum-security-and-total-value-extracted/1035/10
 )
 
