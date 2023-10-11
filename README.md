@@ -21,11 +21,15 @@ This repository is for research notes and reference materials related to SUAVE. 
 * [Xyn Spec](https://hackmd.io/@sxysun/suavespec)
 * [The Future of MEV is SUAVE](https://writings.flashbots.net/the-future-of-mev-is-suave)
 * [Devcon Talk](https://youtu.be/ACXAzLy3iWY)
+* [Decentralized crypto needs you: to be a geographical decentralization maxi](https://collective.flashbots.net/t/decentralized-crypto-needs-you-to-be-a-geographical-decentralization-maxi/1385)
+* [MEV Roast | Privacy Tradeoffs - Phil Daian](https://www.youtube.com/watch?v=ueZMJHGsQzc)  
 * [Suave, Anoma, Shared Sequencers, and Super Builders](https://dba.mirror.xyz/NTg5FSq1o_YiL_KJrKBOsOkyeiNUPobvZUrLBGceagg)
-* [ Scaling 2023 : Flashbot - X-domain PBS interfaces for SUAVE](https://www.youtube.com/watch?v=2EHkXJQZNWA)
+* [Scaling 2023 : Flashbot - X-domain PBS interfaces for SUAVE](https://www.youtube.com/watch?v=2EHkXJQZNWA)
+* [Decentralized Crypto Needs Geographic Decentralization - Phil Daian | MEV-SBC ’23](https://www.youtube.com/watch?v=r7MgAb-YFrc) 
 
 ## Concrete 
 * [Intents, SUAVE & Off-chain Auction Infrastructure](https://www.youtube.com/watch?v=DIvHVvjwhAs)
+* [Flashbots ⚒️ MEV Applications - EthGlobal](https://www.youtube.com/watch?v=MGYG-2yF_po&pp=ygUPZXRoZ2xvYmFsIHN1YXZl)
 * [Suave-Geth repo](https://github.com/flashbots/suave-geth)
 * [Suave.Salon EthCC](https://drive.google.com/file/d/14KD40UV5yQwesnCEkDxd24Bb9tZMrHse/view?pli=1)
     * [Code Demo](https://drive.google.com/file/d/1IHuLtxwjRvRpYjMG3oRuAgS5MUZtmAXq/view)
