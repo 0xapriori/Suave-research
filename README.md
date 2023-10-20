@@ -426,6 +426,9 @@ The RPC is also slightly modified. This send raw tx just takes this new off-chai
 	 - That OFA however its designed could maybe specify 200 ms rounds so those nodes have to come to agreement on which transactions are available to all of them and that could be used as inputs to the auction. 
 	 
 That is one idea but this is certainly an open question that gets into the idea that if the main suave chain is this global bulletin board, one application doesn't care if another application's data is available. If you are the block builder it does but if you are CoWSwap it doesn't matter what uniswap is doing so we are playing around with that. 
- 
-  
+
+ ## Roadmap
+
+ ![image](https://github.com/0xapriori/Suave-research/assets/116141134/1b2793b4-c984-4e20-8c8a-ede238fc1577)
+
 
